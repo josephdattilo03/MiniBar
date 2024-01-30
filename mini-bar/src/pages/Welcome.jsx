@@ -14,7 +14,7 @@ export default function Welcome() {
                 <p className='mb-5'>A pocket sized webapp to make drinks</p>
                 <div className='mx-5 d-flex'>
                     <button onClick={() => {navigate('/login')}} className='btn btn-lg btn-primary mx-2'>Login</button>
-                    <button className='btn btn-lg btn-outline-primary mx-2'>Join</button>
+                    <button onClick={() => {navigate('/register')}} className='btn btn-lg btn-outline-primary mx-2'>Join</button>
                 </div>
             </div>
         </div>

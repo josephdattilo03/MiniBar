@@ -1,8 +1,8 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 
-export default function RequireAuth({user, children}) {
+export default function RequireLogin({user, children}) {
     return (
-        user ? children : <Navigate to="/login" replace></Navigate>
+        user ? children : <Navigate to="/welcome" replace></Navigate>
     )
 }
