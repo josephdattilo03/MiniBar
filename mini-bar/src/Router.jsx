@@ -27,8 +27,8 @@ export default function Router() {
         <Route path='/welcome' Component={Welcome}></Route>
         <Route path='/register' Component={Register}></Route>
         <Route path='/login' Component={Login}></Route>
-        <Route path='/' element={<RequireLogin user={user}><Home></Home></RequireLogin>}></Route>
-        <Route path='/drink' element={<RequireLogin user={user}><Drink></Drink></RequireLogin>}/>
+        <Route path='/' element={<RequireLogin user={user}><Home userId={user ? user.email : null}></Home></RequireLogin>}></Route>
+        <Route path='/drink' element={<RequireLogin user={user}><Drink userId={user ? user.email : null}></Drink></RequireLogin>}/>
       </Routes>
     </BrowserRouter>
   )

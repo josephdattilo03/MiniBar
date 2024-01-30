@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import DrinkService from '../services/drink.service'
+import { useNavigate } from 'react-router-dom'
 
-export default function Drink() {
+export default function Drink(props) {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
+    const navigate = useNavigate()
 
 
-    async function sendDrink() {
-        
+
+    async function submitDrink() {
+        try {
+            await DrinkService.createDrink({name: name, description: description}, props.userId)
+            navigate("/")
+        } catch (err) {
+            console.log(err.message)
+        }
     }
 
     return (
@@ -24,7 +33,7 @@ export default function Drink() {
                         <label className="mb-2" htmlFor="exampleInputPassword1">Recipe</label>
                         <textarea value={description} onChange={(e) => {setDescription(e.target.value)}} className="form-control" id="exampleInputPassword1" placeholder="Add 1 lime..." />
                     </div>
-                    <div className=' mt-5 px-5 border border-primary'>
+                    <div onClick={(e) => {e.preventDefault(); submitDrink()}} className=' mt-5 px-5 border border-primary'>
                         <h1 className='text-primary'>+</h1>
                     </div>
                 </div>

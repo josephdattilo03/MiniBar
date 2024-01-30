@@ -1,6 +1,6 @@
-import {collection, addDoc, query, getDocs, doc, updateDoc, deleteDoc} from 'firebase/firestore'
+import {collection, addDoc, query, getDocs, doc, updateDoc, deleteDoc, where} from 'firebase/firestore'
 import {db} from "../firebase/firebase"
-import Recipe from "../models/recipe"
+
 
 
 class RecipeService {
@@ -16,6 +16,21 @@ class RecipeService {
             description: recipe.description
         })
         return recipe
+    }
+
+
+    async fetchRecipes(userId) {
+        const collectionRef = collection(db, this.collection)
+        const q = query(collectionRef, where("user", "==", userId))
+        const querySnapshot = await getDocs(q)
+
+        const recipes = []
+        querySnapshot.forEach((doc) => {
+            const data = doc.data()
+            const recipe = {name: data.name, description: data.description}
+            recipes.push(recipe)
+        })
+        return recipes
     }
     
     async deleteRecipe(recipeId) {
